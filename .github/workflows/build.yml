@@ -16,4 +16,13 @@ jobs:
           -storepass password123 \
           -keypass password123
           
-          base64 -w0 my-keystore.jks
+          # Save base64 to file (won't be hidden)
+          base64 -w0 my-keystore.jks > keystore-base64.txt
+      
+      - name: Upload Base64 File
+        uses: actions/upload-artifact@v4
+        with:
+          name: keystore-files
+          path: |
+            my-keystore.jks
+            keystore-base64.txt
