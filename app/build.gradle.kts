@@ -12,11 +12,11 @@ android {
     compileSdk = 35
 
     signingConfigs {
-        release {
-            storeFile file(System.getenv("RELEASE_KEYSTORE_FILE") ?: "debug.keystore")
-            storePassword System.getenv("KEY_STORE_PASSWORD") ?: "android"
-            keyAlias System.getenv("ALIAS") ?: "androiddebugkey"
-            keyPassword System.getenv("KEY_PASSWORD") ?: "android"
+        create("release") {
+            storeFile = file(System.getenv("RELEASE_KEYSTORE_FILE") ?: "debug.keystore")
+            storePassword = System.getenv("KEY_STORE_PASSWORD") ?: "android"
+            keyAlias = System.getenv("ALIAS") ?: "androiddebugkey"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "android"
         }
     }
 
@@ -35,7 +35,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
