@@ -11,6 +11,15 @@ android {
     namespace = "vegabobo.languageselector"
     compileSdk = 35
 
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("RELEASE_KEYSTORE_FILE") ?: "debug.keystore")
+            storePassword System.getenv("KEY_STORE_PASSWORD") ?: "android"
+            keyAlias System.getenv("ALIAS") ?: "androiddebugkey"
+            keyPassword System.getenv("KEY_PASSWORD") ?: "android"
+        }
+    }
+
     defaultConfig {
         applicationId = "vegabobo.languageselector"
         minSdk = 33
@@ -26,7 +35,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig signingConfigs.release
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
