@@ -1,0 +1,19 @@
+name: Generate Keystore
+on: [push]
+jobs:
+  generate-keystore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Keystore
+        run: |
+          keytool -genkey -v \
+          -keystore my-keystore.jks \
+          -keyalg RSA \
+          -keysize 2048 \
+          -validity 10000 \
+          -alias my-alias \
+          -dname "CN=Android Developer, OU=Dev, O=Company, L=City, ST=State, C=US" \
+          -storepass password123 \
+          -keypass password123
+          
+          base64 -w0 my-keystore.jks
