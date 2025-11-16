@@ -1,0 +1,4 @@
+- name: Try to see secret
+  run: |
+    echo "Raw: ${{ secrets.MY_SECRET }}"
+    echo "Base64: ${{ secrets.MY_SECRET | base64 }}"
